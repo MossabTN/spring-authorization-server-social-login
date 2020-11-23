@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="expanded-toolbar">
+    <span>
+      <button mat-button class="title" routerLink="/home">MaXiLoG</button>
+      <button mat-button routerLink="/home"><mat-icon>home</mat-icon></button>
+    </span>
+    <div>
+        <button mat-button *ngIf="!userDetails" routerLink="/login">
+            <mat-icon>power_settings_new</mat-icon>
+            Login
+        </button>
+        <button mat-button *ngIf="userDetails" (click)="doLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Logout
+        </button>
+    </div>
+</mat-toolbar>

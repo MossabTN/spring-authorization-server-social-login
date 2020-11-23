@@ -1,0 +1,69 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authorization
+    username: maxilog-authorization-user
+    password: maxilog-authorization-password
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    schemas: public
+    #locations: db/migration
+    validate-on-migrate: true
+    baseline-on-migrate: true
+    enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 543814128306-93mbctp322dlngdtqsl754e3m571r591.apps.googleusercontent.com
+            clientSecret: _PI6vTOnNr_SBL6bCxQEDHnw
+            redirectUri: "{baseUrl}/oauth/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 223590125774906
+            clientSecret: 7298a87d88931c62066883d72c745b3b
+            redirectUri: "{baseUrl}/oauth/callback/{registrationId}" # Note that facebook now mandates the use of https redirect URIs, so make sure your app supports https in production
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: a9a3a6ce3c763944895e
+            clientSecret: 48fabfd9541a410abe1d9a8b22121f1048d28506
+            redirectUri: "{baseUrl}/oauth/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+        provider:
+          google:
+            authorizationUri: https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent
+            tokenUri: https://oauth2.googleapis.com/token
+            userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+application:
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the frontend client in the /oauth/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:4200/oauth/redirect
+      - myandroidapp://oauth/redirect
+      - myiosapp://oauth/redirect
+      - https://oauth.pstmn.io/v1/callback #postman
+
+logging:
+  level:
+    org:
+      springframework: INFO

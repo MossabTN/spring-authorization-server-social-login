@@ -1,0 +1,37 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.expanded-toolbar {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-toolbar.mat-primary {
+  background: #1976d2;
+  color: #fff;
+}
+
+mat-toolbar.mat-toolbar {
+  //position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.button-row {
+  display: table-cell;
+  width: 490px;
+  padding-top: 5px;
+
+}
+.button-row .mat-raised-button{
+  width: 90px;
+  margin-right: 5px;
+}
